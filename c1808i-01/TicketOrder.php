@@ -7,14 +7,19 @@ class TicketOrder {
 		$database = new Database();
 		$connection = $database->get_connection();
 		$result = mysqli_query($connection, $sql);
-		if(!mysqli_error()) {
+		$error = mysqli_error($connection);
+		if($error) {
+			echo json_encode(array(
+				"result" => "failed", 
+				"data" => $result,
+				"message"=>"Insert data failed: ".$error
+			));
+		} else {
 			echo json_encode(array(
 				"result" => "ok", 
 				"data" => $result,
-				"message"=>"Insert data successfully"
+				"message"=>"Insert data successful "
 			));
-		} else {
-			echo json_encode(array("result" => "failed", "message"=>"Insert data failed"));
 		}
 	}
 	public function updateTicketOrder($orderId, 
@@ -25,18 +30,24 @@ class TicketOrder {
 				"ticketTypeId='$ticketTypeId'".
 				",description='$description'".
 				",numberOfTickets='$numberOfTickets'".
-				" WHERE id='$orderId'";
+				",active='$active'".
+				" WHERE id=$orderId";
 		$database = new Database();
 		$connection = $database->get_connection();
 		$result = mysqli_query($connection, $sql);
-		if(!mysqli_error()) {
+		$error = mysqli_error($connection);
+		if($error) {
 			echo json_encode(array(
-				"result" => "ok", 
-				"data" => $sql,
-				"message"=>"Update data successfully"
+				"result" => "failed", 
+				"message"=>"Update data failed: ".$error
 			));
 		} else {
-			echo json_encode(array("result" => "failed", "message"=>"Update data failed"));
+			echo json_encode(array(
+				"result" => "ok", 
+				"data" => $result,
+				"sql" => $sql,
+				"message"=>"Update data successful "
+			));
 		}
 	}
 	public function queryTicketOrders($limit, $page) {

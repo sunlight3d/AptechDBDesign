@@ -11,7 +11,7 @@ if(isset($_POST) && count($_POST) > 0) {
 	$ticketTypeId = $_POST["ticketTypeId"];
 	$description = $_POST["description"];
 	$numberOfTickets = $_POST["numberOfTickets"];
-	$active = $_POST["active"];
+	$active = isset($_POST["active"]) ? $_POST["active"] : "0";
 	$ticketOrder = new TicketOrder();
 
 	if(isset($_POST["orderId"])) {
