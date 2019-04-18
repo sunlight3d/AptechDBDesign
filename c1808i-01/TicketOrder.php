@@ -2,7 +2,8 @@
 include "Database.php";
 class TicketOrder {
 	public function insertTicketOrder($userPhone,$ticketTypeId, $description,$numberOfTickets) {
-		$sql = "INSERT INTO tblOrders(userPhone, ticketTypeId, description, numberOfTickets) VALUES('$userPhone', '$ticketTypeId', '$description', '$numberOfTickets')";
+		$sql = "INSERT INTO tblOrders(userPhone, ticketTypeId, description, numberOfTickets) ".
+			"VALUES('$userPhone', '$ticketTypeId', '$description', '$numberOfTickets')";
 		$database = new Database();
 		$connection = $database->get_connection();
 		$result = mysqli_query($connection, $sql);
@@ -49,7 +50,7 @@ class TicketOrder {
 			array_push($ticketOrders, $row);
 		}
 
-		if(!mysqli_error()) {
+		if(!mysqli_error($connection)) {
 			echo json_encode(array(
 				"result" => "ok", 
 				"data" => $ticketOrders,

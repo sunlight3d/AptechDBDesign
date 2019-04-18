@@ -6,7 +6,7 @@
             $port = "3306";
             $databaseName = "dbmerciado";
             $databaseUserName = "root";
-            $databasePassword = "";
+            $databasePassword = "";            
             $this->connection = mysqli_connect(
                 $hostname,
                 $databaseUserName,
@@ -14,9 +14,9 @@
                 $databaseName);
     
             if (!$this->connection) {
-                echo "<h2>Failed to connect to MySQL: " . mysqli_connect_error()."</h2>";
+                // echo "<h2>Failed to connect to MySQL: " . mysqli_connect_error()."</h2>";
             } else {
-                echo "<h2>Connect DB Successfully</h2>";
+                // echo "<h2>Connect DB Successfully</h2>";
             }
         }
         function get_connection() {

@@ -7,7 +7,6 @@ header("Content-Type: application/json; charset=UTF-8");
 //http://localhost:81/c1808i-01/ticketOrders.php
 include "./TicketOrder.php";
 if(isset($_POST) && count($_POST) > 0) {
-	
 	$userPhone = $_POST["userPhone"];
 	$ticketTypeId = $_POST["ticketTypeId"];
 	$description = $_POST["description"];
@@ -25,8 +24,7 @@ if(isset($_POST) && count($_POST) > 0) {
 		//insert	
 		$ticketOrder->insertTicketOrder($userPhone,$ticketTypeId, $description,$numberOfTickets);
 	}
-} else if(isset($_GET) && count($_GET) > 0){
-	echo "GET";
+} else if(isset($_GET) && count($_GET) > 0){	
 	$ticketOrder = new TicketOrder();
 	$page = $_GET["page"];
 	$limit = $_GET["limit"];
